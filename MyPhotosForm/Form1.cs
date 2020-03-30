@@ -112,11 +112,11 @@ namespace MyPhotosForm
                 ImagePathValue.Text = path;
                 if(path.EndsWith(".png") || path.EndsWith(".jpg"))
                 {
-                    isMovieValue.Checked = true;
+                    isMovieValue.Checked = false;
                 }
                 else
                 {
-                    isMovieValue.Checked = false;
+                    isMovieValue.Checked = true;
                 }
                 path = path.Replace(@"\", @"\\");
                 pictureBox1.Image = Image.FromFile(path);

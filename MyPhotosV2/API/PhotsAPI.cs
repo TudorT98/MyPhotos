@@ -30,6 +30,18 @@ namespace MyPhotosV2
             }
             return photos;
         }
+        public void UpdateIsRemoved(Photo photo)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var result = ctx.PhotoSet.SingleOrDefault(p => p.Id == photo.Id);
+                if (result != null)
+                {
+                    result.isRemoved = "true";
+                    ctx.SaveChanges();
+                }
+            }
+        }
 
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,7 +82,14 @@ namespace MyPhotosForm
             {
                 foreach(Photo photo in photos)
                 {
-                    PictureList.Items.Add(photo.FullPath);
+                    if (File.Exists(photo.FullPath))
+                    {
+                        PictureList.Items.Add(photo.FullPath);
+                    }
+                    else
+                    {
+                        photsAPI.UpdateIsRemoved(photo);
+                    }
                 }
             }
 
