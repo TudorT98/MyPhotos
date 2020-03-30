@@ -65,6 +65,12 @@
     <Compile Include="EventForm.Designer.cs">
       <DependentUpon>EventForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GetPicture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetPicture.Designer.cs">
+      <DependentUpon>GetPicture.cs</DependentUpon>
+    </Compile>
     <Compile Include="LandScapeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GetPicture.resx">
+      <DependentUpon>GetPicture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LandScapeForm.resx">
       <DependentUpon>LandScapeForm.cs</DependentUpon>

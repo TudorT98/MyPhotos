@@ -49,6 +49,7 @@
             this.PersonComboBox = new System.Windows.Forms.ComboBox();
             this.UploadButton = new System.Windows.Forms.Button();
             this.EventComboBox = new System.Windows.Forms.ComboBox();
+            this.GetPicture = new System.Windows.Forms.Button();
             isMovie = new System.Windows.Forms.TextBox();
             Location = new System.Windows.Forms.TextBox();
             Landscape = new System.Windows.Forms.TextBox();
@@ -94,6 +95,15 @@
             Person.TabIndex = 16;
             Person.Text = "Person";
             Person.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // Event
+            // 
+            Event.Location = new System.Drawing.Point(322, 204);
+            Event.Name = "Event";
+            Event.ReadOnly = true;
+            Event.Size = new System.Drawing.Size(100, 20);
+            Event.TabIndex = 19;
+            Event.Text = "Event";
             // 
             // button1
             // 
@@ -247,15 +257,6 @@
             this.UploadButton.UseVisualStyleBackColor = true;
             this.UploadButton.Click += new System.EventHandler(this.UploadImage_Click);
             // 
-            // Event
-            // 
-            Event.Location = new System.Drawing.Point(322, 204);
-            Event.Name = "Event";
-            Event.ReadOnly = true;
-            Event.Size = new System.Drawing.Size(100, 20);
-            Event.TabIndex = 19;
-            Event.Text = "Event";
-            // 
             // EventComboBox
             // 
             this.EventComboBox.FormattingEnabled = true;
@@ -264,11 +265,22 @@
             this.EventComboBox.Size = new System.Drawing.Size(192, 21);
             this.EventComboBox.TabIndex = 20;
             // 
+            // GetPicture
+            // 
+            this.GetPicture.Location = new System.Drawing.Point(346, 377);
+            this.GetPicture.Name = "GetPicture";
+            this.GetPicture.Size = new System.Drawing.Size(269, 37);
+            this.GetPicture.TabIndex = 21;
+            this.GetPicture.Text = "Get Picture";
+            this.GetPicture.UseVisualStyleBackColor = true;
+            this.GetPicture.Click += new System.EventHandler(this.GetPicture_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.GetPicture);
             this.Controls.Add(this.EventComboBox);
             this.Controls.Add(Event);
             this.Controls.Add(this.UploadButton);
@@ -316,6 +328,7 @@
         private System.Windows.Forms.ComboBox PersonComboBox;
         private System.Windows.Forms.Button UploadButton;
         private System.Windows.Forms.ComboBox EventComboBox;
+        private System.Windows.Forms.Button GetPicture;
     }
 
 

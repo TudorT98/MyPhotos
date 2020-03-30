@@ -16,5 +16,21 @@ namespace MyPhotosV2
                 ctx.SaveChanges();
             }
         }
+        public List<Photo> GetPhoto(int LocationId, int LandScapeId, int PersonId, int EventId)
+        {
+            List<Photo> photos;
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var queryable = ctx.PhotoSet
+                .Where(x => x.EventId == EventId && EventId != 0)
+                .Where(x => x.LocationId == LocationId && LocationId != 0)
+                .Where(x => x.LandScapeId == LandScapeId && LandScapeId != 0)
+                .Where(x => x.PersonId == PersonId && PersonId != 0);
+                photos = queryable.ToList();
+            }
+            return photos;
+        }
+
+
     }
 }

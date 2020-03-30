@@ -39,6 +39,24 @@ namespace MyPhotosV2
                 return peopleName;
             }
         }
+        public Person GetPersonByName(string name)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var person = from p in ctx.PersonSet where (p.FirstName == name) select p;
+                if (person != null)
+                    return person.FirstOrDefault();
+                return null;
+            }
+        }
+        public int GetIdByName(string name)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var id = from p in ctx.PersonSet where (p.FirstName == name) select p.Id;
+                return (int)(id.FirstOrDefault());
+            }
+        }
     }
 
 

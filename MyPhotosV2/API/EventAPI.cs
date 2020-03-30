@@ -35,7 +35,7 @@ namespace MyPhotosV2
             using (PhotoContainer ctx = new PhotoContainer())
             {
                 var id = from e in ctx.EventSet where (e.EventName == name) select e.Id;
-                return (int)(id.SingleOrDefault());
+                return (int)(id.FirstOrDefault());
             }
      }
         public Event GetEventByName(string name)

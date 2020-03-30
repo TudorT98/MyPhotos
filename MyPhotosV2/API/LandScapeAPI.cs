@@ -34,7 +34,7 @@ namespace MyPhotosV2
             using (PhotoContainer ctx = new PhotoContainer())
             {
                 var id = from l in ctx.LandScapeSet where (l.LandScapeName == name) select l.Id;
-                return (int)(id.SingleOrDefault());
+                return (int)(id.FirstOrDefault());
             }
         }
         public LandScape GetLandScapeByName(string name)

@@ -134,10 +134,6 @@
           <EntitySet Name="LocationSet" EntityType="Photo.Location" />
           <EntitySet Name="EventSet" EntityType="Photo.Event" />
           <EntitySet Name="PersonSet" EntityType="Photo.Person" />
-          <AssociationSet Name="PersonPhoto" Association="Photo.PersonPhoto">
-            <End Role="Person" EntitySet="PersonSet" />
-            <End Role="Photo" EntitySet="PhotoSet" />
-          </AssociationSet>
           <AssociationSet Name="LocationPhoto" Association="Photo.LocationPhoto">
             <End Role="Location" EntitySet="LocationSet" />
             <End Role="Photo" EntitySet="PhotoSet" />
@@ -150,6 +146,10 @@
             <End Role="Event" EntitySet="EventSet" />
             <End Role="Photo" EntitySet="PhotoSet" />
           </AssociationSet>
+          <AssociationSet Name="PersonPhoto" Association="Photo.PersonPhoto">
+            <End Role="Person" EntitySet="PersonSet" />
+            <End Role="Photo" EntitySet="PhotoSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Photo">
           <Key>
@@ -157,7 +157,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EventId1" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Person" Relationship="Photo.PersonPhoto" FromRole="Photo" ToRole="Person" />
           <Property Name="PersonId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Location" Relationship="Photo.LocationPhoto" FromRole="Photo" ToRole="Location" />
           <Property Name="LocationId" Type="Int32" Nullable="false" />
@@ -167,6 +166,8 @@
           <Property Name="FullPath" Type="String" Nullable="false" />
           <Property Name="isMovie" Type="String" Nullable="false" />
           <Property Name="isRemoved" Type="String" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Photo.PersonPhoto" FromRole="Photo" ToRole="Person" />
+          <Property Name="PersonId1" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="LandScape">
           <Key>
@@ -202,23 +203,11 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EventId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Photo" Relationship="Photo.PersonPhoto" FromRole="Person" ToRole="Photo" />
           <Property Name="FirstName" Type="String" Nullable="false" />
           <Property Name="LastName" Type="String" Nullable="false" />
           <Property Name="Age" Type="String" Nullable="false" />
+          <NavigationProperty Name="Photo" Relationship="Photo.PersonPhoto" FromRole="Person" ToRole="Photo" />
         </EntityType>
-        <Association Name="PersonPhoto">
-          <End Type="Photo.Person" Role="Person" Multiplicity="1" />
-          <End Type="Photo.Photo" Role="Photo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Photo">
-              <PropertyRef Name="PersonId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="LocationPhoto">
           <End Type="Photo.Location" Role="Location" Multiplicity="1" />
           <End Type="Photo.Photo" Role="Photo" Multiplicity="*" />
@@ -252,6 +241,18 @@
             </Principal>
             <Dependent Role="Photo">
               <PropertyRef Name="EventId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PersonPhoto">
+          <End Type="Photo.Person" Role="Person" Multiplicity="1" />
+          <End Type="Photo.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PersonId1" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

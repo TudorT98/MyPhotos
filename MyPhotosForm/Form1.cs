@@ -139,24 +139,32 @@ namespace MyPhotosForm
                 LandScape landScape = landScapeAPI.GetLandScapeByName(LandscapeComboBox.Text);
                 Event @event = eventAPI.GetEventByName(EventComboBox.Text);
                 Location location = locationAPI.GetLocationByName(LocationComboBox.Text);
+                Person person = personAPI.GetPersonByName(PersonComboBox.Text.Substring(0, PersonComboBox.Text.IndexOf(" ")));
                 string isMovie = "false";
                 if(isMovieValue.Checked == true)
                 {
                     isMovie = "true";
                 }
-                 photo = new Photo(ImagePathValue.Text, isMovie, "false");
-               // photo = new Photo(EventId, LocationId, LandscapeId, ImagePathValue.Text, isMovie, "false");
-                // photo = new Photo(@event, location, landScape, ImagePathValue.Text, isMovie, "false");
-                photo.Location = location;
-                photo.LandScape = landScape;
-                photo.Event = @event;
-                photo.Person = null;
+                //photo = new Photo(ImagePathValue.Text, isMovie, "false");
+                //photo = new Photo(EventId, LocationId, LandscapeId, ImagePathValue.Text, isMovie, "false");
+                // photo = new Photo(person,@event, location, landScape, ImagePathValue.Text, isMovie, "false");
+                photo = new Photo(ImagePathValue.Text, isMovie, "false", location, landScape, @event, person);
+               // photo.Location = location;
+               // photo.LandScape = landScape;
+               // photo.Event = @event;
+               // photo.Person = null;
 
                 photosAPI.AddPhoto(photo);
                 
             }
 
         }
+        private void GetPicture_Click(object sender, EventArgs e)
+        {
+            GetPicture getPicture = new GetPicture();
+            getPicture.ShowDialog();
+        }
+            
 
             private void textBox2_TextChanged(object sender, EventArgs e)
         {

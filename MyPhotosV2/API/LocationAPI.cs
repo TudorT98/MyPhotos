@@ -34,7 +34,7 @@ namespace MyPhotosV2
             using (PhotoContainer ctx = new PhotoContainer())
             {
                 var id = from l in ctx.LocationSet where (l.LocationName == name) select l.Id;
-                return (int)(id.SingleOrDefault());
+                return (int)(id.FirstOrDefault());
             }
         }
         public Location GetLocationByName(string name)

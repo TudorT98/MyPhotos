@@ -15,7 +15,7 @@ namespace MyPhotosV2
     public partial class Photo
     {
         public int Id { get; set; }
-        public int EventId1 { get; set; }
+        public int EventId { get; set; }
         public int PersonId { get; set; }
         public int LocationId { get; set; }
         public int LandScapeId { get; set; }
@@ -23,36 +23,26 @@ namespace MyPhotosV2
         public string isMovie { get; set; }
         public string isRemoved { get; set; }
     
-        public virtual Person Person { get; set; }
         public virtual Location Location { get; set; }
         public virtual LandScape LandScape { get; set; }
         public virtual Event Event { get; set; }
+        public virtual Person Person { get; set; }
 
-        public Photo(int eventId1, int locationId, int landScapeId, string fullPath, string isMovie, string isRemoved)
+        public Photo(string fullPath, string isMovie, string isRemoved, Location location, LandScape landScape, Event @event, Person person)
         {
-            EventId1 = eventId1;
-            LocationId = locationId;
-            LandScapeId = landScapeId;
             FullPath = fullPath;
             this.isMovie = isMovie;
             this.isRemoved = isRemoved;
-        }
-        public Photo(Event myevent, Location location, LandScape landScape, string fullPath, string isMovie, string isRemoved)
-        {
-            Event = myevent;
             Location = location;
             LandScape = landScape;
-            FullPath = fullPath;
-            this.isMovie = isMovie;
-            this.isRemoved = isRemoved;
+            Event = @event;
+            Person = person;
         }
-
-        public Photo(string fullPath, string isMovie, string isRemoved)
+        public Photo()
         {
-            FullPath = fullPath;
-            this.isMovie = isMovie;
-            this.isRemoved = isRemoved;
+
         }
     }
+
 
 }

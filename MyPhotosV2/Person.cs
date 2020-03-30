@@ -20,16 +20,14 @@ namespace MyPhotosV2
             this.Photo = new HashSet<Photo>();
         }
 
-        public Person( string firstName, string lastName, string age)
+        public Person(string firstName, string lastName, string age)
         {
-            
             FirstName = firstName;
             LastName = lastName;
             Age = age;
         }
 
         public int Id { get; set; }
-        public int EventId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Age { get; set; }
