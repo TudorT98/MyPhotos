@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPhotosForm", "MyPhotosFor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPhotosV2", "MyPhotosV2\MyPhotosV2.csproj", "{FAF06879-1E58-4D00-BFEC-A1B64B14BAC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCF", "WCF\WCF.csproj", "{13705FAE-4F4F-4E3D-BAA1-30B0A537843C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FAF06879-1E58-4D00-BFEC-A1B64B14BAC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAF06879-1E58-4D00-BFEC-A1B64B14BAC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAF06879-1E58-4D00-BFEC-A1B64B14BAC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13705FAE-4F4F-4E3D-BAA1-30B0A537843C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13705FAE-4F4F-4E3D-BAA1-30B0A537843C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13705FAE-4F4F-4E3D-BAA1-30B0A537843C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13705FAE-4F4F-4E3D-BAA1-30B0A537843C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
