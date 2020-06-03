@@ -46,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ObjectWCF.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="InterfaceWCF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SMyPhoto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyPhotosV2\MyPhotosV2.csproj">

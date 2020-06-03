@@ -1,0 +1,49 @@
+﻿@page
+@model MyPhotosRazor.Pages.PhotoDetails.PhotoDetailsModel
+@{
+    ViewData["Title"] = "PhotoDetails";
+}
+
+<h1>Details</h1>
+
+<h4>Photo</h4>
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.photoDTO.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayNameFor(model => model.photoDTO.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.photoDTO.LocationName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayNameFor(model => model.photoDTO.LocationName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.photoDTO.EventName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayNameFor(model => model.photoDTO.EventName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.photoDTO.LandScapeName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayNameFor(model => model.photoDTO.LandScapeName)
+        </dd>
+        
+    </dl>
+</div>
+<div>
+   
+    <a asp-page="./Photos/Index">Back to List</a>
+</div>
+
+<div>
+    <a asp-page="./Photos/Index">Back to List</a>
+</div>
+

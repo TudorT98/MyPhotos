@@ -22,8 +22,10 @@ namespace MyPhotosForm
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            myEvent = new Event(EventNameValue.Text,EventDescriptionValue.Text);
-            eventAPI.AddEvent(myEvent);
+             myEvent = new MyPhotosV2.Event(EventNameValue.Text,EventDescriptionValue.Text);
+            // eventAPI.AddEvent(myEvent);
+            MyPhotosClient myPhotoClient = new MyPhotosClient();
+            myPhotoClient.AddEvent(myEvent);
             Clear();
         }
         void Clear()

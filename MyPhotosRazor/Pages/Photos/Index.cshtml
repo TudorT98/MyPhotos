@@ -1,0 +1,60 @@
+﻿@page
+@model MyPhotosRazor.Pages.Photos.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<form>
+    <p>
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<p>
+  Number of photos :  @Html.DisplayFor(model => model.Count);
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Photos[0].FullPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photos[0].EventName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photos[0].LandScapeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photos[0].LocationName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Photos)
+        {
+            <tr style="font-size:small">
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullPath)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LandScapeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationName)
+                </td>
+                <td>
+                    <a asp-page="/PhotoDetails/PhotoDetails" asp-route-id="@item.Id">Details</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

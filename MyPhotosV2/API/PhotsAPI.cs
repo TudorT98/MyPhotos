@@ -42,7 +42,55 @@ namespace MyPhotosV2
                 }
             }
         }
+        public bool UpdatePhoto(Photo photo, int @eventId, int landScapeId, int personId, int locationId)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var result = ctx.PhotoSet.SingleOrDefault(p => p.Id == photo.Id);
+                if (result != null)
+                {
+                    result.LandScapeId = landScapeId;
+                    result.LocationId = locationId;
+                    result.EventId = @eventId;
+                    result.PersonId = personId;
+                    ctx.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
+        public bool DeletePhoto(int id)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                ctx.Database.ExecuteSqlCommand("Delete From Photos where Id =@p0", id);
+                return true;
+            }
+        }
 
+        public List<Photo> GetPhoto()
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var photos = from p in ctx.PhotoSet select p;
+                if (photos != null)
+                    return photos.ToList();
+                return null;
+            }
+        }
+
+        public Photo GetPhotoById(int id)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var photo = from p in ctx.PhotoSet where (p.Id == id) select p;
+                return photo.FirstOrDefault();
+            }
+
+        }
     }
 }

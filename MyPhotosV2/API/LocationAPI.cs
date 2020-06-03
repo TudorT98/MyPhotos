@@ -22,10 +22,10 @@ namespace MyPhotosV2
             using (PhotoContainer ctx = new PhotoContainer())
             {
                 var locations = from l in ctx.LocationSet select l.LocationName;
-               if (locations != null)
-               {
+                if (locations != null)
+                {
                     locationsName = locations.ToList();
-               }
+                }
                 return locationsName;
             }
         }
@@ -46,6 +46,51 @@ namespace MyPhotosV2
                     return location.SingleOrDefault();
                 return null;
             }
+        }
+
+        public bool UpdateLocation(int id, string locationName, string locationDescription, string type)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var result = ctx.LocationSet.SingleOrDefault(l => l.Id == id);
+                if (result != null)
+                {
+                    result.LocationName = locationName;
+                    result.LocationDescription = locationDescription;
+                    result.LocationType = type;
+                    return true;
+                }
+                return false;
+            }
+        }
+        public bool DeleteLocation(int id)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                ctx.Database.ExecuteSqlCommand("Delete From Locations where Id =@p0", id);
+                return true;
+            }
+        }
+
+        public List<Location> GetLocation()
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var locations = from l in ctx.LocationSet select l;
+                if (locations != null)
+                    return locations.ToList();
+                return null;
+            }
+        }
+
+        public Location GetLocationById(int id)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var locations = from l in ctx.LocationSet where (l.Id == id) select l;
+                return locations.FirstOrDefault();
+            }
+
         }
     }
 }

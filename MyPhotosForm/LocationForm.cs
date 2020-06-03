@@ -23,7 +23,8 @@ namespace MyPhotosForm
         private void SaveButton_Click(object sender, EventArgs e)
         {
             location = new Location(LocationNameValue.Text,LocationDescriptionValue.Text,LocationTypeValue.Text);
-            locationApi.AddLocation(location);
+            MyPhotosClient myPhotoClient = new MyPhotosClient();
+            myPhotoClient.AddLocation(location);
             Clear();
         }
         void Clear()

@@ -22,7 +22,8 @@ namespace MyPhotosForm
         private void SavePerson_Click(object sender, EventArgs e)
         {
             person = new Person(FirstNameValue.Text,LastNameValue.Text,AgeValue.Value.ToString());
-            personAPI.AddPerson(person);
+            MyPhotosClient myPhotoClient = new MyPhotosClient();
+            myPhotoClient.AddPerson(person);
             Clear();
         }
         void Clear()

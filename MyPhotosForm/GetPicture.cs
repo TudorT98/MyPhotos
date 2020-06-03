@@ -20,6 +20,8 @@ namespace MyPhotosForm
         PersonAPI PersonAPI = new PersonAPI();
         EventAPI EventAPI = new EventAPI();
         PhotsAPI photsAPI = new PhotsAPI();
+        MyPhotosClient myPhotoClient = new MyPhotosClient();
+        Photo selectedPhoto;
 
         List<string> eventsName;
         List<string> locationsName;
@@ -29,33 +31,44 @@ namespace MyPhotosForm
         public GetPicture()
         {
             InitializeComponent();
-            eventsName = EventAPI.GetEventsName();
+
+            //Populate events Combobox
+            eventsName = myPhotoClient.GetEventsName();
             ComboBox eventComboBox = EventComb;
+            ComboBox updateEvent = EventUpdateComb;
             foreach (string photoEvent in eventsName)
             {
                 eventComboBox.Items.Add(photoEvent);
+                updateEvent.Items.Add(photoEvent);
             }
             //Populate locations Combobox
-            locationsName = locationAPI.GetLocationsName();
+            locationsName = myPhotoClient.GetLocationsName();
             ComboBox locationComboBox = LocationComb;
+            ComboBox updateLocation = LocationUpdateComb;
             foreach (string location in locationsName)
             {
                 locationComboBox.Items.Add(location);
+                updateLocation.Items.Add(location);
             }
             //Populate people Combobox
-            peopleName = PersonAPI.GetPeopleName();
+            peopleName = myPhotoClient.GetPeopleName();
             ComboBox peopleComboBox = PersonComb;
+            ComboBox updatePeople = PersonUpdateComb;
             foreach (string person in peopleName)
             {
                 peopleComboBox.Items.Add(person);
+                updatePeople.Items.Add(person);
             }
-            //Populate people Combobox
-            landScapesName = LandScapeAPI.GetLandScapeName();
+            //Populate landScape Combobox
+            landScapesName = myPhotoClient.GetLandScapeName();
             ComboBox landScapeComboBox = LandScapeComb;
+            ComboBox updateLandScape = LandScapeUpdateComb;
             foreach (string landscape in landScapesName)
             {
                 landScapeComboBox.Items.Add(landscape);
+                updateLandScape.Items.Add(landscape);
             }
+       
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -68,16 +81,18 @@ namespace MyPhotosForm
         private void FindButton_Click(object sender, EventArgs e)
         {
             List<Photo> photos;
+            MyPhotosClient myPhotoClient = new MyPhotosClient();
             string LocationName = LocationComb.Text;
             string LandScapeName = LandScapeComb.Text;
             string PersonName = PersonComb.Text;
             string EventName = EventComb.Text;
-            int LocationId = locationAPI.GetIdByName(LocationName);
-            int LandScapeId = LandScapeAPI.GetIdByName(LandScapeName);
-            int PersonId = PersonAPI.GetIdByName(PersonName.Substring(0, PersonName.IndexOf(" ")));
-            int EventId = EventAPI.GetIdByName(EventName);
+            int LocationId = myPhotoClient.GetIdByName(LocationName);
+            int LandScapeId = myPhotoClient.GetIdByName(LandScapeName);
+            int PersonId = myPhotoClient.GetIdByName(PersonName.Substring(0, PersonName.IndexOf(" ")));
+            int EventId = myPhotoClient.GetIdByName(EventName);
 
-           photos = photsAPI.GetPhoto(LocationId, LandScapeId, PersonId, EventId);
+           
+            photos = myPhotoClient.GetPhoto(LocationId, LandScapeId, PersonId, EventId);
             if(photos.Count > 0)
             {
                 foreach(Photo photo in photos)
@@ -85,16 +100,92 @@ namespace MyPhotosForm
                     if (File.Exists(photo.FullPath))
                     {
                         PictureList.Items.Add(photo.FullPath);
+                        selectedPhoto = photo;
                     }
                     else
                     {
-                        photsAPI.UpdateIsRemoved(photo);
+                        myPhotoClient.UpdateIsRemoved(photo);
                     }
                 }
+            }
+            else
+            {
+                PictureList.Items.Clear();
+                pictureBox1.Image = null;
             }
 
         }
 
+        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        { }
+
+        private void GetPicture_Load(object sender, EventArgs e){}
+        
+
+        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void comboBox6_SelectedIndexChanged(object sender, EventArgs e) {}
        
+
+        private void UpdateTitle_TextChanged(object sender, EventArgs e) {}
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+            MyPhotosClient myPhotoClient = new MyPhotosClient();
+
+            if (selectedPhoto != null)
+            {
+                string LocationName = LocationUpdateComb.Text;
+                string LandScapeName = LandScapeUpdateComb.Text;
+                string PersonName = PersonUpdateComb.Text;
+                string EventName = EventUpdateComb.Text;
+                int LocationId;
+                int LandScapeId;
+                int PersonId;
+                int EventId;
+                if (LocationName != "")
+                {
+                     LocationId = myPhotoClient.GetIdByName(LocationName);
+                }
+                else
+                {
+                    LocationId = selectedPhoto.LocationId; 
+                }
+                if (LandScapeName != "")
+                {
+                    LandScapeId = myPhotoClient.GetIdByName(LandScapeName);
+                }
+                else
+                {
+                    LandScapeId = selectedPhoto.LandScapeId;
+                }
+                if (PersonName != "")
+                {
+                    PersonId = myPhotoClient.GetIdByName(PersonName.Substring(0, PersonName.IndexOf(" ")));
+                }
+                else
+                {
+                    PersonId = selectedPhoto.PersonId;
+                }
+                if (EventName != "")
+                {
+                    EventId = myPhotoClient.GetIdByName(EventName);
+                }
+                else
+                {
+                    EventId = selectedPhoto.EventId;
+                }
+
+              //  myPhotoClient.UpdatePhoto(selectedPhoto, EventId, LandScapeId, PersonId, LocationId);
+
+            }
+            else
+            {
+                MessageBox.Show("No image selected");
+            }
+
+
+
+        }
+
     }
 }

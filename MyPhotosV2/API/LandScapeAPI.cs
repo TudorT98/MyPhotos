@@ -47,5 +47,47 @@ namespace MyPhotosV2
                 return null;
             }
         }
+        public bool UpdateLandScape(int id,string landscapeName,string landscapeDescription)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var result = ctx.LandScapeSet.SingleOrDefault(l => l.Id == id);
+                if (result != null)
+                {
+                    result.LandScapeName = landscapeName;
+                    result.LandScapeDescription = landscapeDescription;
+                    return true;
+                }
+                return false;
+            }
+        }
+        public bool DeleteLandScape(int id)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                ctx.Database.ExecuteSqlCommand("Delete From Landscapes where Id =@p0", id);
+                return true;
+            }
+        }
+
+        public List<LandScape> GetLandScapes()
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var landScapes = from l in ctx.LandScapeSet select l;
+                if (landScapes != null)
+                    return landScapes.ToList();
+                return null;
+            }
+        }
+
+        public LandScape GetLandScapeById(int id)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var landScape = from l in ctx.LandScapeSet where (l.Id == id) select l;
+                return landScape.FirstOrDefault();
+            }
+        }
     }
 }

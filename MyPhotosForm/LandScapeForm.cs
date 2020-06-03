@@ -22,8 +22,10 @@ namespace MyPhotosV2
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {
+
             landscape = new LandScape(LandScapeNameValue.Text, LandScapeDescriptionValue.Text);
-            landScapeAPI.AddLandScape(landscape);
+            MyPhotosClient myPhotoClient = new MyPhotosClient();
+            myPhotoClient.AddLandScape(landscape);
             Clear();
         }
         void Clear()

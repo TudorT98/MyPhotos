@@ -15,6 +15,7 @@ namespace MyPhotosForm
     public partial class Form1 : Form
     {
         EventAPI eventAPI = new EventAPI();
+        MyPhotosClient myPhotoClient = new MyPhotosClient();
         LocationAPI locationAPI = new LocationAPI();
         PersonAPI personAPI = new PersonAPI();
         LandScapeAPI landScapeAPI = new LandScapeAPI();
@@ -29,28 +30,28 @@ namespace MyPhotosForm
         {
             InitializeComponent();
             //Populate event ComboBox
-            eventsName = eventAPI.GetEventsName();
+            eventsName = myPhotoClient.GetEventsName();
             ComboBox eventComboBox = EventComboBox;
             foreach(string photoEvent in eventsName)
             {
                 eventComboBox.Items.Add(photoEvent);
             }
             //Populate locations Combobox
-            locationsName = locationAPI.GetLocationsName();
+            locationsName = myPhotoClient.GetLocationsName();
             ComboBox locationComboBox = LocationComboBox;
             foreach (string location in locationsName)
             {
                 locationComboBox.Items.Add(location);
             }
             //Populate people Combobox
-            peopleName = personAPI.GetPeopleName();
+            peopleName = myPhotoClient.GetPeopleName();
             ComboBox peopleComboBox = PersonComboBox;
             foreach (string person in peopleName)
             {
                 peopleComboBox.Items.Add(person);
             }
             //Populate people Combobox
-            landScapesName = landScapeAPI.GetLandScapeName();
+            landScapesName = myPhotoClient.GetLandScapeName();
             ComboBox landScapeComboBox = LandscapeComboBox;
             foreach (string landscape in landScapesName)
             {
@@ -132,14 +133,14 @@ namespace MyPhotosForm
         {
             if(!(ImagePathValue.Text == ""))
             {
-                int LandscapeId = landScapeAPI.GetIdByName(LandscapeComboBox.Text);
-                int EventId = eventAPI.GetIdByName(EventComboBox.Text);
-                int LocationId = locationAPI.GetIdByName(LocationComboBox.Text);
+                int LandscapeId = myPhotoClient.GetIdByName(LandscapeComboBox.Text);
+                int EventId = myPhotoClient.GetIdByName(EventComboBox.Text);
+                int LocationId = myPhotoClient.GetIdByName(LocationComboBox.Text);
 
-                LandScape landScape = landScapeAPI.GetLandScapeByName(LandscapeComboBox.Text);
-                Event @event = eventAPI.GetEventByName(EventComboBox.Text);
-                Location location = locationAPI.GetLocationByName(LocationComboBox.Text);
-                Person person = personAPI.GetPersonByName(PersonComboBox.Text.Substring(0, PersonComboBox.Text.IndexOf(" ")));
+                LandScape landScape = myPhotoClient.GetLandScapeByName(LandscapeComboBox.Text);
+                Event @event = myPhotoClient.GetEventByName(EventComboBox.Text);
+                Location location = myPhotoClient.GetLocationByName(LocationComboBox.Text);
+                Person person = myPhotoClient.GetPersonByName(PersonComboBox.Text.Substring(0, PersonComboBox.Text.IndexOf(" ")));
                 string isMovie = "false";
                 if(isMovieValue.Checked == true)
                 {
@@ -149,12 +150,12 @@ namespace MyPhotosForm
                 //photo = new Photo(EventId, LocationId, LandscapeId, ImagePathValue.Text, isMovie, "false");
                 // photo = new Photo(person,@event, location, landScape, ImagePathValue.Text, isMovie, "false");
                 photo = new Photo(ImagePathValue.Text, isMovie, "false", location, landScape, @event, person);
-               // photo.Location = location;
-               // photo.LandScape = landScape;
-               // photo.Event = @event;
-               // photo.Person = null;
+                // photo.Location = location;
+                // photo.LandScape = landScape;
+                // photo.Event = @event;
+                // photo.Person = null;
 
-                photosAPI.AddPhoto(photo);
+                myPhotoClient.AddPhoto(photo);
                 
             }
 

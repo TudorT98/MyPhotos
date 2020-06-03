@@ -57,8 +57,54 @@ namespace MyPhotosV2
                 return (int)(id.FirstOrDefault());
             }
         }
+        public bool updatePerson(int id,string FirstName,string LastName,string Age)
+        {
+          using (PhotoContainer ctx = new PhotoContainer())
+           {
+               var result = ctx.PersonSet.SingleOrDefault(p => p.Id == id);
+                if (result != null)
+                  {
+                      result.FirstName = FirstName;
+                      result.LastName = LastName;
+                      result.Age = Age;
+                      return true;
+                   }
+                    return false;
+                }
+           }
+
+        public bool DeletePerson(int id)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                ctx.Database.ExecuteSqlCommand("Delete From People where Id =@p0", id);
+                return true;
+            }
+        }
+
+        public List<Person> GetPeople()
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var people = from l in ctx.PersonSet select l;
+                if (people != null)
+                    return people.ToList();
+                return null;
+            }
+        }
+
+        public Person GetPersonById(int id)
+        {
+            using (PhotoContainer ctx = new PhotoContainer())
+            {
+                var people = from l in ctx.PersonSet where (l.Id == id) select l;
+                return people.FirstOrDefault();
+            }
+
+        }
+
+
     }
-
-
+    
 }
 
